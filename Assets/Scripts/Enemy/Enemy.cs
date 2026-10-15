@@ -35,14 +35,6 @@ public class Enemy : MonoBehaviour
     }
 
 
-    private void Die()
-    {   
-        Debug.Log("Enemy die");
-        Destroy(gameObject);
-    }
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 }

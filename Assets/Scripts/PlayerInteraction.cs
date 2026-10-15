@@ -4,6 +4,7 @@ public class PlayerInteraction : MonoBehaviour
 {   
     [SerializeField]
     private GameScore gameScore;
+    private int attackDamage = 20;
    
     private PlayerInventory playerInventory;
 
@@ -19,6 +20,13 @@ public class PlayerInteraction : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision) // cái này dừng lại stop object khi va chạm collision
     //void OnTriggerEnter2D(Collider2D other) cái này trigger cho đi xuyên qua, bat trigger trong editor inspector collider
     {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            EnemyHealth enemyHealth = collision.gameObject.GetComponent<EnemyHealth>();
+
+            enemyHealth.TakeDamage(attackDamage);
+            
+        }
         Debug.Log("Phat hien va cham collision voi obstacle." + collision.gameObject.name);
     }
 
