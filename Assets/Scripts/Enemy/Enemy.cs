@@ -10,9 +10,6 @@ public class Enemy : MonoBehaviour
     public int currentHP;
     void Start()
     {
-        Debug.Log("Enemy spawn:"+ enemyType);
-        Debug.Log("Enemy damage:"+ attackDamage);
-
     }
 
 
@@ -24,7 +21,7 @@ public class Enemy : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Player"))
         {
-            Player enemyHealth = collision.gameObject.GetComponent<Player>();
+            PlayerHealth enemyHealth = collision.gameObject.GetComponent<PlayerHealth>();
 
             if (enemyHealth != null)
             {
