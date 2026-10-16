@@ -102,9 +102,9 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 0
+  m_LinearDamping: 3
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -128,7 +128,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca0dcde5098c88d449f0ba8cd566e534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyHealth
+  knockbackForce: 50
   maxHP: 50
+  knockbackDuration: 0.2
 --- !u!114 &7056442689190899394
 MonoBehaviour:
   m_ObjectHideFlags: 0

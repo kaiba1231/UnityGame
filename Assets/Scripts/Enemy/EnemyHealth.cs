@@ -4,8 +4,11 @@ using UnityEngine;
 public class EnemyHealth : MonoBehaviour
 {
 
-
+    [SerializeField] private float knockbackForce = 5f; 
     [SerializeField] private int maxHP = 50; 
+    [SerializeField] private float knockbackDuration = 0.2f; 
+    private EnemyMovement enemyMovement;
+    private Rigidbody2D rb;
     private int currentHP; 
     private EnemySpawner enemySpawner;
     private void Awake()
@@ -13,6 +16,7 @@ public class EnemyHealth : MonoBehaviour
         currentHP = maxHP;
 
         enemySpawner = FindAnyObjectByType<EnemySpawner>();
+        rb = GetComponent<Rigidbody2D>();
 
         if (enemySpawner == null)
         {
@@ -22,18 +26,41 @@ public class EnemyHealth : MonoBehaviour
         {
             Debug.Log("DA TIM THAY EnemySpawner: " + enemySpawner.name);
         }
+        enemyMovement = GetComponent<EnemyMovement>();
     }
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Vector2 attackerPosition)
     {
         if (damage <= 0) return;
-
+         ApplyKnockback(attackerPosition);
         currentHP = Mathf.Max(currentHP - damage, 0);
         Debug.Log("Enemy HP:" + currentHP);
 
         if (currentHP == 0) Die();
+   
     }
 
+    private void ApplyKnockback(Vector2 attackerPosition)
+    {
+        if (rb == null) return; 
+
+        Vector2 direction = (rb.position - attackerPosition).normalized;
+       
+
+            Debug.Log("Direction: " + direction);
+            Debug.Log("Force: " + knockbackForce);
+            Debug.Log("Body Type: " + rb.bodyType);
+            Debug.Log("Constraints: " + rb.constraints);
+
+        if (enemyMovement != null) 
+        {
+            enemyMovement.ApplyKnockbackDelay(knockbackDuration);
+        }
+
+        rb.linearVelocity = Vector2.zero;
+
+        rb.AddForce (direction * knockbackForce, ForceMode2D.Impulse);
+    }
     
    private void Die()
     {
@@ -54,9 +81,6 @@ public class EnemyHealth : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-        TakeDamage (25);
-        }
+    
     }
 }
