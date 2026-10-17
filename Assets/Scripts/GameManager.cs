@@ -19,7 +19,8 @@ public class GameManager : MonoBehaviour
     public void GameOver()
     {
         if (isGameOver) return;
-
+        Time.timeScale = 0f;
+        
         isGameOver = true;
 
         if (gameOverPanel != null) gameOverPanel.SetActive(true);
@@ -33,11 +34,17 @@ public class GameManager : MonoBehaviour
 
     public void RestartGame()
     {
+        Time.timeScale = 1f;
         SceneManager
             .LoadScene(SceneManager
-                .GetActiveScene().buildIndex);
+                .GetActiveScene().name);
     }
 
+    public void ReturnToMainMenu()
+    {
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenuScene");
+    }
 
     // Update is called once per frame
     void Update()
