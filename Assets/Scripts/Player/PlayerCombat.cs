@@ -19,7 +19,6 @@ public class PlayerCombat : MonoBehaviour
             EnemyHealth enemyHealth = hit.GetComponent<EnemyHealth> ();
 
             if (enemyHealth != null) enemyHealth.TakeDamage(attackDamage, transform.position);
-        
         }
     }
 

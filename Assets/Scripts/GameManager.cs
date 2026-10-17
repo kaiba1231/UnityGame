@@ -1,11 +1,13 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+ using TMPro;
 
 public class GameManager : MonoBehaviour
-{
-    [SerializeField]
-    private GameObject gameOverPanel;
+{   
+   
+[SerializeField] private GameScore gameScore;
+[SerializeField] private TMP_Text finalScoreText;
+[SerializeField] private GameObject gameOverPanel;
 
     private bool isGameOver;
 
@@ -20,7 +22,13 @@ public class GameManager : MonoBehaviour
 
         isGameOver = true;
 
-        if (gameOverPanel != null)       gameOverPanel.SetActive(true);
+        if (gameOverPanel != null) gameOverPanel.SetActive(true);
+        
+        if (gameScore != null && finalScoreText != null)
+        {
+            finalScoreText.SetText( "Final Score: {0:0}", gameScore.Score);
+        }
+
     }
 
     public void RestartGame()

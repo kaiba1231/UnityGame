@@ -6,11 +6,6 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private int attackDamage = 20;
     public string enemyType = "Goblin";
-    private int maxHP = 50;
-    public int currentHP;
-    void Start()
-    {
-    }
 
 
     void OnCollisionEnter2D(Collision2D collision)
@@ -21,12 +16,11 @@ public class Enemy : MonoBehaviour
         }
         else if (collision.gameObject.CompareTag("Player"))
         {
-            PlayerHealth enemyHealth = collision.gameObject.GetComponent<PlayerHealth>();
+            PlayerHealth playerHealth = collision.gameObject.GetComponent<PlayerHealth>();
 
-            if (enemyHealth != null)
+            if (playerHealth != null)
             {
-                enemyHealth.TakeDamage(attackDamage);
-                currentHP -= 50;
+                playerHealth.TakeDamage(attackDamage);
             }
         }
     }

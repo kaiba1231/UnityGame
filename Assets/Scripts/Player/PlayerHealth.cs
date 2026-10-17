@@ -1,3 +1,4 @@
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
@@ -32,6 +33,25 @@ public class PlayerHealth : MonoBehaviour
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    public void Heal(int amount)
+    {   
+      
+        if (amount <= 0)
+        {
+        return;
+        }
+        Debug.Log("Hoi mau"+ amount);
+        currentHP = Mathf.Min(currentHP + amount, maxHP);
+
+        if (healthBarUI != null)
+        {
+        healthBarUI.SetHealth(currentHP);
+        }
+    }
+
+   
+
 
     void Start()
     {   

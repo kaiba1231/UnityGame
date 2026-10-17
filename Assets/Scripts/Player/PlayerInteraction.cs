@@ -22,34 +22,43 @@ public class PlayerInteraction : MonoBehaviour
         Debug.Log("Phat hien va cham collision voi obstacle." + collision.gameObject.name);
     }
 
-    void OnTriggerEnter2D(Collider2D coin)
+    void OnTriggerEnter2D(Collider2D collision)
     {   
-        if (coin.CompareTag("Coin") && playerInventory != null)
+        if (collision.CompareTag("Coin") && playerInventory != null)
         {   
-            if (coin.gameObject.name.Contains("Silver"))
+            if (collision.gameObject.name.Contains("Silver"))
             {
                 playerInventory.AddCoin(1);
                 gameScore.AddScore(3);
-                Destroy(coin.gameObject);
+                Destroy(collision.gameObject);
             }
-            else if (coin.gameObject.name.Contains("Premium"))
+            else if (collision.gameObject.name.Contains("Premium"))
             {
                 playerInventory.AddCoin(1);
                 gameScore.AddScore(5);
-                Destroy(coin.gameObject);
+                Destroy(collision.gameObject);
             }
             else 
             {
                 playerInventory.AddCoin(1);
                 gameScore.AddScore(1);
-                Destroy(coin.gameObject);
+                Destroy(collision.gameObject);
             }
-
-          
-            Debug.Log("Đã lụm" + coin.gameObject.name);
         }
+
+        PlayerItemPickUp itemPickup = collision.GetComponent<PlayerItemPickUp>();
+        
+        if (itemPickup != null)
+        {
+            Item item = itemPickup.CreateItem();
+            playerInventory.AddItem(item);
+            Debug.Log("Picked up: " + item.ItemName);
+            Destroy(collision.gameObject);
+        }
+                
     }
 
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {

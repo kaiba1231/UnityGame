@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Enemy
   - Gem
+  - Potion
   layers:
   - Default
   - TransparentFX
