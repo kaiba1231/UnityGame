@@ -16,12 +16,21 @@ private int score;
     }
 
     private void Start()
-        {
+    {
+        if (GameSession.Instance != null)
+            {
+            score = GameSession.Instance.Score;
+            }
         UpdateUI();
-        }
+    }
 
     public void AddScore(int amount)
-    {
+    {   
+        if (GameSession.Instance != null)
+        {
+        GameSession.Instance.Score = score;
+        }
+
         if (amount <= 0)
         {
         return;

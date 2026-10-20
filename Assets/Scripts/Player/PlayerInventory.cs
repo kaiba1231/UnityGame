@@ -21,7 +21,27 @@ public class PlayerInventory : MonoBehaviour
     }
 
 
+    private void LoadInventory()
+    {
+        if (GameSession.Instance == null)
+        {
+        return;
+        }
 
+        coinCount = GameSession.Instance.CoinCount;
+        items = GameSession.Instance.LoadItems();
+    }
+
+    private void SaveInventory()
+    {
+        if (GameSession.Instance == null)
+        {
+        return;
+        }
+
+        GameSession.Instance.CoinCount = coinCount;
+        GameSession.Instance.SaveItems(items);
+    }
 
     public void AddCoin(int amount)
     {

@@ -10,10 +10,24 @@ public class PlayerHealth : MonoBehaviour
 
 
     int currentHP;
-    private void Awake()
+
+    private void UpdateHealth()
     {
-        currentHP = maxHP;
+        SaveHealth();
+
+        if (healthBarUI != null)
+        {
+        healthBarUI.SetHealth(currentHP);
+        }
     }
+    private void SaveHealth()
+    {
+        if (GameSession.Instance != null)
+        {
+        GameSession.Instance.SaveHealth(currentHP);
+        }
+    }
+  
 
     private void Die()
     {   
@@ -53,9 +67,27 @@ public class PlayerHealth : MonoBehaviour
    
 
 
-    void Start()
-    {   
-        if (healthBarUI != null)    healthBarUI.SetMaxHealth(maxHP);
+   private void Start()
+    {
+    if (GameSession.Instance != null &&
+        GameSession.Instance.HasSavedHealth)
+        {
+            currentHP = Mathf.Clamp(
+            GameSession.Instance.CurrentHealth,
+            0,
+            maxHP
+            );
+        }
+    else
+        {
+        currentHP = maxHP;
+        SaveHealth();
+        }
 
+    if (healthBarUI != null)
+    {
+    healthBarUI.SetMaxHealth(maxHP);
+    healthBarUI.SetHealth(currentHP);
+    }
     }
 }
