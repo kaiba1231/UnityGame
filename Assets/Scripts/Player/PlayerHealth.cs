@@ -4,20 +4,28 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour
 {   
     [SerializeField] private int maxHP = 100;
- 
     [SerializeField] private HealthBarUI healthBarUI;
     [SerializeField] private GameManager gameManager;
 
-
-    int currentHP;
-
-    private void UpdateHealth()
+    private int currentHP;
+    public int CurrentHP
     {
+    get { return currentHP; }
+    }
+
+    public void SetHealth( int hp)
+    {   
+        currentHP = Mathf.Clamp(hp, 0, maxHP);
         SaveHealth();
 
         if (healthBarUI != null)
         {
         healthBarUI.SetHealth(currentHP);
+        }
+
+        if (currentHP == 0 && gameObject.activeSelf)
+        {
+        Die();
         }
     }
     private void SaveHealth()
