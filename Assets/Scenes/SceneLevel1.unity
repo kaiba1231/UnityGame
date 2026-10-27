@@ -262,6 +262,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7669025912591211622, guid: b61103a9a16856c4ebb945448d3d1567, type: 3}
+      propertyPath: chaseRange
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 7669025912591211622, guid: b61103a9a16856c4ebb945448d3d1567, type: 3}
+      propertyPath: attackRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7669025912591211622, guid: b61103a9a16856c4ebb945448d3d1567, type: 3}
+      propertyPath: patrolPointA.x
+      value: -10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7669025912591211622, guid: b61103a9a16856c4ebb945448d3d1567, type: 3}
+      propertyPath: patrolPointA.y
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7669025912591211622, guid: b61103a9a16856c4ebb945448d3d1567, type: 3}
+      propertyPath: patrolPointB.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7669025912591211622, guid: b61103a9a16856c4ebb945448d3d1567, type: 3}
+      propertyPath: patrolPointB.y
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7761568446136817421, guid: b61103a9a16856c4ebb945448d3d1567, type: 3}
       propertyPath: patrolPointA.x
       value: -15
@@ -1725,7 +1749,7 @@ CapsuleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 0.5, y: 1}
+  m_Size: {x: 1, y: 2}
   m_Direction: 0
 --- !u!114 &348666214
 MonoBehaviour:

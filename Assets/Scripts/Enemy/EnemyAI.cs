@@ -112,7 +112,15 @@ public class EnemyAI : MonoBehaviour
         float distToTarget = Vector2.Distance(transform.position, currentPatrolTarget);
         if (distToTarget <= patrolReachDistance)
         {
-            currentPatrolTarget = (currentPatrolTarget == patrolPointA) ? patrolPointB : patrolPointA;
+            // Nếu đang đi tới A thì chuyển sang B, ngược lại chuyển về A
+            if (currentPatrolTarget == patrolPointA)
+            {
+                currentPatrolTarget = patrolPointB;
+            }
+            else
+            {
+                currentPatrolTarget = patrolPointA;
+            }
         }
     }
 
@@ -138,6 +146,15 @@ public class EnemyAI : MonoBehaviour
 
         UnityEditor.Handles.color = Color.red;
         UnityEditor.Handles.DrawWireDisc(transform.position,Vector3.forward,attackRange);
+        
+        Gizmos.color = Color.green;
+
+        Gizmos.DrawLine(patrolPointA, patrolPointB);
+
+        UnityEditor.Handles.color = Color.green;
+        UnityEditor.Handles.DrawWireDisc(patrolPointA, Vector3.forward, patrolReachDistance);
+
+        UnityEditor.Handles.DrawWireDisc(patrolPointB, Vector3.forward, patrolReachDistance);
     }
 #endif
 }

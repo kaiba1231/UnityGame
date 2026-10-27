@@ -15,6 +15,8 @@ GameObject:
   - component: {fileID: 8608036474326732669}
   - component: {fileID: 7056442689190899394}
   - component: {fileID: -5859714216932741793}
+  - component: {fileID: 7669025912591211622}
+  - component: {fileID: 8428427361602255368}
   m_Layer: 7
   m_Name: NormalEnemy
   m_TagString: Enemy
@@ -49,9 +51,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5b9d6c7772136e84299cab8a592608c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Enemy
-  attackDamage: 10
-  enemyType: Goblin
-  currentHP: 0
 --- !u!70 &370910376360319107
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -102,8 +101,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDamping: 3
-  m_AngularDamping: 0.05
+  m_LinearDamping: 10
+  m_AngularDamping: 0.03
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -206,3 +205,35 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
   m_BlendShapeWeights: []
+--- !u!114 &7669025912591211622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3498159036637981632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8bebb52e4bd5ec4f9d5aa94a0a3f3c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyAI
+  player: {fileID: 0}
+  chaseRange: 6
+  attackRange: 3.5
+  patrolPointA: {x: 0, y: 0}
+  patrolPointB: {x: 0, y: 0}
+  patrolReachDistance: 0.2
+--- !u!114 &8428427361602255368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3498159036637981632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a30c45557fcfd04c8c8956961beaf9b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyCombat
+  damage: 15
+  attackCooldown: 0.2
