@@ -147,7 +147,6 @@ public class EnemyAI : MonoBehaviour
         UnityEditor.Handles.color = Color.red;
         UnityEditor.Handles.DrawWireDisc(transform.position,Vector3.forward,attackRange);
         
-        Gizmos.color = Color.green;
 
         Gizmos.DrawLine(patrolPointA, patrolPointB);
 

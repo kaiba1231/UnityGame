@@ -1,23 +1,25 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
- using TMPro;
+using TMPro;
 
 public class GameManager : MonoBehaviour
-{   
-   
-[SerializeField] private GameScore gameScore;
-[SerializeField] private GameObject pausePanel;
-[SerializeField] private TMP_Text finalScoreText;
-[SerializeField] private GameObject gameOverPanel;
+{
+
+    [SerializeField] private GameScore gameScore;
+    [SerializeField] private GameObject pausePanel;
+    [SerializeField] private TMP_Text finalScoreText;
+    [SerializeField] private GameObject gameOverPanel;
+    [SerializeField] private NetworkManager networkManager;
+    [SerializeField] private GameObject player;
 
     private bool isGameOver;
     private bool isPaused;
     private void Start()
-    {   
+    {
         Time.timeScale = 1f;
         isGameOver = false;
         isPaused = false;
-        if (gameOverPanel != null)     gameOverPanel.SetActive(false);
+        if (gameOverPanel != null) gameOverPanel.SetActive(false);
         if (pausePanel != null) pausePanel.SetActive(false);
     }
 
@@ -26,11 +28,11 @@ public class GameManager : MonoBehaviour
         if (isGameOver || isPaused) return;
 
         isPaused = true;
-        
+
         Time.timeScale = 0f;
 
         if (pausePanel != null) pausePanel.SetActive(true);
-        
+
     }
     public void ResumeGame()
     {
@@ -44,21 +46,24 @@ public class GameManager : MonoBehaviour
 
 
     public void GameOver()
-    {   
+    {
         if (isGameOver) return;
-        Time.timeScale = 0f;
         isGameOver = true;
         isPaused = false;
 
-
+        if (
+        gameScore != null &&
+        finalScoreText != null &&
+        networkManager != null &&
+        player != null
+        )
+        {
+            finalScoreText.SetText("Final Score: {0:0}", gameScore.Score);
+            networkManager.SendScore(player.name, gameScore.Score);
+        }
         if (gameOverPanel != null) gameOverPanel.SetActive(true);
         if (pausePanel != null) pausePanel.SetActive(false);
-      
-        if (gameScore != null && finalScoreText != null)
-        {
-            finalScoreText.SetText( "Final Score: {0:0}", gameScore.Score);
-        }
-
+        Time.timeScale = 0f;
     }
 
     public void RestartGame()
@@ -82,7 +87,7 @@ public class GameManager : MonoBehaviour
             if (isPaused) ResumeGame();
             else PauseGame();
         }
-     
+
     }
 }
 
