@@ -19,7 +19,11 @@ public class MainMenu : MonoBehaviour
         if (deleteSaveButton != null)
             deleteSaveButton.interactable = hasSave;
     }
-    private void Start() { UpdateButton(); }
+    private void Start()
+    {
+        UpdateButton();
+        gameObject.AddComponent<LeaderboardUI>();
+    }
     public void StartGame()
     {
         Time.timeScale = 1f;

@@ -48,7 +48,6 @@ private int score;
     {   
       
         if (amount <= 0) return;
-        score += amount;
         SetScore (score + amount);
     }
 

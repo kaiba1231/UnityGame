@@ -8,10 +8,20 @@ public class PlayerMovementComponent : MonoBehaviour
     private float moveSpeed = 5f;
     private Rigidbody2D rb;
     private Vector2 direction;
+    [SerializeField] private Animator animator;
+    private Vector2 lastDirection = Vector2.down;
+
+
 
     void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        if (animator == null)
+            animator = GetComponent<Animator>();
+
+        if (animator == null)
+            animator = GetComponentInChildren<Animator>();
     }
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -19,6 +29,31 @@ public class PlayerMovementComponent : MonoBehaviour
 
     }
 
+    private void UpdateAnimation()
+    {
+        if (animator == null) return;
+
+        if (direction.sqrMagnitude > 0.01f)
+        {
+            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+            {
+                lastDirection = direction.x > 0
+                ? Vector2.right
+                : Vector2.left;
+            }
+            else
+            {
+                lastDirection = direction.y > 0
+                ? Vector2.up
+                : Vector2.down;
+            }
+        }
+
+        animator.SetFloat("DirectionX", lastDirection.x);
+        animator.SetFloat("DirectionY", lastDirection.y);
+        animator.SetFloat("Speed", direction.magnitude);
+
+    }
     // Update is called once per frame
     void Update()
     {
@@ -30,14 +65,17 @@ public class PlayerMovementComponent : MonoBehaviour
         {
             direction.Normalize();
         }
+
+        UpdateAnimation();
+
     }
 
-  
+
     void FixedUpdate()
     {
-        Vector2 targetPosition = rb.position + (moveSpeed *Time.fixedDeltaTime* direction);
+        Vector2 targetPosition = rb.position + (moveSpeed * Time.fixedDeltaTime * direction);
 
-        rb.MovePosition(targetPosition);        
+        rb.MovePosition(targetPosition);
     }
-    
+
 }
